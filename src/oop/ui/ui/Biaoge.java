@@ -16,7 +16,7 @@ public class Biaoge extends JFrame {
 
         JFrame f=new JFrame();
         Object[][] playerInfo={
-                {"王鹏",new Integer(100),new Integer(80),new Boolean(true)},
+                {"王鹏",new Integer(180),new Integer(80),new Boolean(true)},
                 {"李鹏",new Integer(20),new Integer(30),new Boolean(false)},
                 {"张鹏",new Integer(89),new Integer(60),new Boolean(true)}
         };
