@@ -17,7 +17,7 @@ public class AccountFrame extends JFrame {
     private JPanel panelprocess=new JPanel();
     private JPanel jPanel=new JPanel();
 
-    private JTable jtable=new JTable(4,2);
+   // private JTable jtable=new JTable(4,2);
     private JLabel jlable1=new JLabel("学号");
     private JLabel jlable2=new JLabel("姓名");
     private JLabel jlable3=new JLabel("身份证号码");
@@ -49,7 +49,7 @@ public class AccountFrame extends JFrame {
         //jPanel.add(labAccount);
        // jPanel.add(txtAccount);
 
-        jPanel.add(jtable);
+       // jPanel.add(jtable);
         //jPanel.setVisible(false);
 
 
