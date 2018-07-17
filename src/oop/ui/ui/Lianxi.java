@@ -32,7 +32,7 @@ public class Lianxi {
         }
         return null;
     }
-    private void insertData(String namevalue, String publishers, String author) throws SQLException {
+    private void insertData(int namevalue, String publishers, String author) throws SQLException {
         //1、创建数据库连接
         Statement Statement = null;
         try {
@@ -60,13 +60,13 @@ public class Lianxi {
             }
         }
     }
-    private void updateData(int id ,String namevalue,String publishers,String author) throws SQLException {
+    private void updateData(int namevalue, int id,String publishers) throws SQLException {
         Statement Statement = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/hnb11?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
                     "root","1234");
-            String sql = "update xinxi set Book_name='"+ namevalue + "', Book_publishers = '" + publishers+ "' ,Book_author='" + author+ "'where id=" + id;
+            String sql = "update xinxi set Book_name='"+ namevalue + "', Book_publishers = '" + publishers+ "'where id=" + id;
             Statement statement = connection.createStatement();
             int rows = statement.executeUpdate(sql);
             System.out.println("更新结果为："+ (rows>0));
@@ -177,7 +177,7 @@ public class Lianxi {
         Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/hnb11?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
                 "root","1234");
         //2、构建查询的SQL语句
-        String sql = "select id,Book_name,Book_publishers  from xinxi "+"where Book_name like '%"+keyWord+"%'or Book_publishers like '%"+keyWord+"%'or id like '%"+keyWord+"%'";
+        String sql = "select id,Book_name,Book_publishers  from xinxi "+"where Book_name like '%"+keyWord+"%'or Book_publishers like '%"+keyWord+"%'or id like '%"+keyWord+"%'or Book_authorlike '%"+keyWord+"%'";
         //3、执行SQL语句，并获得结果集
 
         ResultSet resultSet = null;
@@ -197,10 +197,11 @@ public class Lianxi {
 
         while (resultSet.next()) {
             int id1 = resultSet.getInt("id");
-            String namevalue = resultSet.getString("Book_name");
+            int namevalue = Integer.parseInt(resultSet.getString("Book_name"));
             String publishers= resultSet.getString("Book_publishers");
+            String author= resultSet.getString("Book_author");
 
-            buffer.append(id1+ "\t|" + namevalue + "|\t|" + publishers + "|" + System.lineSeparator());
+            buffer.append(id1+ "\t|" + namevalue + "|\t|" + publishers+ "|\t|" + author + "|" + System.lineSeparator());
         }
         System.out.println(buffer.toString());
     }
@@ -214,37 +215,36 @@ public class Lianxi {
         while(true){
             System.out.println("=====================================================");
             System.out.println("|===         欢迎使用hnb11人工智能系统            ===|");
-            System.out.println("|  1、添加数据  2、修改数据 3、删除数据  4、退出系统  |");
+            System.out.println("|  1、添加数据  2、修改数据 3、删除数据 4、退出系统  |");
             System.out.println("=====================================================");
             System.out.println("请选择你要进行的操作：");
-            long select=0;
+            int select=0;
             select=scanner.nextInt();
             while(select<1||select>4){
                 System.out.println("选择的操作系统不能识别，请重新选择：");
             }
 
             String value=null;
-            JDBCDemo jdbcdemo=new   JDBCDemo();
+            Lianxi lianxi1=new Lianxi();
             if(select==1){
-                System.out.println("请输入要添加书籍名和出版社，中间用逗号分隔。");
+                System.out.println("请输入要添加的账号和密码，中间用逗号分隔。举例：124.com.3445");
                 value= String.valueOf(scanner.nextInt());
                 String [] values=value.split(",");
-                lianxi.insertData(String.valueOf((int)System.currentTimeMillis()),
+                lianxi.insertData((int)System.currentTimeMillis(),
                         values[0],values[1]);
 
             }else if(select==2){//修改数据
-                System.out.println("请输入要修改的书籍名和出版社和id，系统将根据id进行更新，id不会进行更新。");
+                System.out.println("请输入要修改的账号和密码和id，系统将根据id进行更新，id不会进行更新。");
                 value= String.valueOf(scanner.nextInt());
                 String [] values=value.split(",");
-                lianxi.updateData(Integer.parseInt( values[0]), values[1],values[2],values[3]);
+                lianxi.updateData(Integer.parseInt( values[0]), Integer.parseInt(values[1]),values[2]);
             }else if(select==3){//删除数据
                 System.out.println("请输入要删除的id");
                 value= String.valueOf(scanner.nextInt());
                 String [] values=value.split(",");
                 lianxi.deleteData(Integer.parseInt(value));
 
-            }
-            else if(select==6){//退出系统
+            }else if(select==4){//退出系统
                 System.out.println("退出系统");
                 System.exit(-1);
 
