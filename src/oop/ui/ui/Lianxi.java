@@ -32,7 +32,7 @@ public class Lianxi {
         }
         return null;
     }
-    private void InsertData(String namevalue, String publishers, String author) throws SQLException {
+    private void insertData(String namevalue, String publishers, String author) throws SQLException {
         //1、创建数据库连接
         Statement Statement = null;
         try {
@@ -60,7 +60,7 @@ public class Lianxi {
             }
         }
     }
-    private void UpdateData(int id ,String namevalue,String publishers,String author) throws SQLException {
+    private void updateData(int id ,String namevalue,String publishers,String author) throws SQLException {
         Statement Statement = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -83,7 +83,7 @@ public class Lianxi {
             }
         }}
 
-    private void DeleteData(int id) throws SQLException {
+    private void deleteData(int id) throws SQLException {
         //1、创建数据库连接
         Statement Statement = null;
         try {
@@ -110,7 +110,7 @@ public class Lianxi {
                 connection.close();
             }
         }}
-    private  String [][] FindAllData(){
+    private  String [][] findAllData(){
         String [][] datas = new String[100][5];//以二维数组的形式在数据库中查找数据
         Connection connection = null;
         Statement  statement = null;
@@ -151,7 +151,7 @@ public class Lianxi {
     }
 
     private  void findAllDataFormat(){
-        String [][] datas = FindAllData();//以表格形式显示出找到的数据
+        String [][] datas = findAllData();//以表格形式显示出找到的数据
         StringBuffer buffer = new StringBuffer();
         buffer.append(" ========================================" + System.lineSeparator());
         buffer.append("|id\t\t|\tnamevalue\t\t|\tpublishers \t\t|\tauthor\t|"+System.lineSeparator());
@@ -206,9 +206,9 @@ public class Lianxi {
     }
     public  static void main(String [] args) throws SQLException {
         Lianxi lianxi=new Lianxi();
-        // lianxi.InsertData("yufeng","5467","juhonh");
-        // lianxi.DeleteData(4);
-        //  lianxi.UpdateData(3,"lifeng","6789","yihu");
+        // lianxi.insertData("yufeng","5467","juhonh");
+        // lianxi.deleteData(4);
+        //  lianxi.updateData(3,"lifeng","6789","yihu");
         //   lianxi.findAllDataFormat();
         // lianxi.findBooktDate("4");
         while(true){
@@ -229,19 +229,19 @@ public class Lianxi {
                 System.out.println("请输入要添加书籍名和出版社，中间用逗号分隔。");
                 value= String.valueOf(scanner.nextInt());
                 String [] values=value.split(",");
-                lianxi.InsertData(String.valueOf((int)System.currentTimeMillis()),
+                lianxi.insertData(String.valueOf((int)System.currentTimeMillis()),
                         values[0],values[1]);
 
             }else if(select==2){//修改数据
                 System.out.println("请输入要修改的书籍名和出版社和id，系统将根据id进行更新，id不会进行更新。");
                 value= String.valueOf(scanner.nextInt());
                 String [] values=value.split(",");
-                lianxi.UpdateData(Integer.parseInt( values[0]), values[1],values[2],values[3]);
+                lianxi.updateData(Integer.parseInt( values[0]), values[1],values[2],values[3]);
             }else if(select==3){//删除数据
                 System.out.println("请输入要删除的id");
                 value= String.valueOf(scanner.nextInt());
                 String [] values=value.split(",");
-                lianxi.DeleteData(Integer.parseInt(value));
+                lianxi.deleteData(Integer.parseInt(value));
 
             }
             else if(select==6){//退出系统
