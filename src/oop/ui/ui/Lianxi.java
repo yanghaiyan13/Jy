@@ -205,12 +205,12 @@ public class Lianxi {
         System.out.println(buffer.toString());
     }
     public  static void main(String [] args) throws SQLException {
-             Lianxi lianxi=new Lianxi();
-       // lianxi.InsertData("yufeng","5467","juhonh");
-       // lianxi.DeleteData(4);
-      //  lianxi.UpdateData(3,"lifeng","6789","yihu");
-     //   lianxi.findAllDataFormat();
-       // lianxi.findBooktDate("4");
+        Lianxi lianxi=new Lianxi();
+        // lianxi.InsertData("yufeng","5467","juhonh");
+        // lianxi.DeleteData(4);
+        //  lianxi.UpdateData(3,"lifeng","6789","yihu");
+        //   lianxi.findAllDataFormat();
+        // lianxi.findBooktDate("4");
         while(true){
             System.out.println("=====================================================");
             System.out.println("|===         欢迎使用hnb11人工智能系统            ===|");
@@ -229,7 +229,7 @@ public class Lianxi {
                 System.out.println("请输入要添加书籍名和出版社，中间用逗号分隔。");
                 value= String.valueOf(scanner.nextInt());
                 String [] values=value.split(",");
-               lianxi.InsertData(String.valueOf((int)System.currentTimeMillis()),
+                lianxi.InsertData(String.valueOf((int)System.currentTimeMillis()),
                         values[0],values[1]);
 
             }else if(select==2){//修改数据
@@ -250,4 +250,4 @@ public class Lianxi {
 
             }
 
-}}}
+        }}}
